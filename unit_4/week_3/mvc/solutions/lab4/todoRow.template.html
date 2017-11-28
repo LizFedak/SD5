@@ -1,0 +1,4 @@
+<td ng-class="todo.completed ? 'strike' : 'clean'">{{todo.task}}</td>
+<td><input type="checkbox" ng-model="todo.completed" /></td>
+<td><button ng-click="update(todo)" class="btn btn-warning">Edit</button></td>
+<td><button ng-click="delete(todo)" class="btn btn-danger">Delete</button></td>

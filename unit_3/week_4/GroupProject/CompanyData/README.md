@@ -1,0 +1,2 @@
+# Company Data
+All of this data was created for you to use should you to use when creating your databases, and structuring your content. If you coose not to use it, you will be expected to fake some of your own data.

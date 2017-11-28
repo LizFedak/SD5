@@ -1,0 +1,9 @@
+[
+		{"name":"Andrew Conlin", "department":"Technolody", "salary":"$10000000"},
+		{"name":"Peter Johnson", "department":"Marketing", "salary":"$90000"},
+		{"name":"Chris Adam", "department":"Sales", "salary":"$72000"},
+		{"name":"John Thompson", "department":"Implementation", "salary":"$45000"},
+		{"name":"Mary Jones", "department":"Support", "salary":"$60000"},
+		{"name":"Michael Jefferson", "department":"Technology", "salary":"$85000"},
+		{"name":"Ryan Hood", "department":"Marketing", "salary":"$110000"}
+]

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>ngTodos</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script src="angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.controller('todosController', function($scope){
+      $scope.todos = [
+        {task: 'go round mums', completed : false},
+        {task: 'get liz back', completed : false},
+        {task: 'sort life out', completed : false}
+      ]
+
+      $scope.addTodo = function(task) {
+        $scope.todos.push({task : task, completed : false});
+      }
+
+      $scope.incompleteTodos = function() {
+        var incomplete = 0;
+        $scope.todos.forEach(function(todo){
+          if (!todo.completed) {
+            ++incomplete;
+          }
+        });
+        return incomplete;
+      }
+
+      $scope.warnUser = function(){
+        return ($scope.incompleteTodos() > 3) ? "label-warning" : "label-success";
+      }
+
+
+    })
+
+    app.filter('completeFilter', function(){
+      return function(todos,complete){
+        var results = [];
+        todos.forEach(function(todo){
+          if (!todo.completed || complete) {
+            results.push(todo);
+          }
+        });
+        return results;
+      }
+    });
+  </script>
+</head>
+<body ng-controller="todosController">
+  <div class="well">
+    <h1>
+      ngTodos
+      <span class="label" ng-class="warnUser()">{{incompleteTodos()}}</span>
+    </h1>
+  </div>
+  <div>
+
+    <input type="text" ng-model="newTask" class="form-control" />
+
+    <button ng-click="addTodo(newTask)" class="btn btn-primary">Add</button>
+    
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Todo</th>
+          <th>Mark</th>
+          <th>Done?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="todo in todos | completeFilter:showComplete">
+          <td>{{todo.task}}</td>
+          <td><input type="checkbox" ng-model="todo.completed" /></td>
+          <td>{{todo.completed}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <h5>
+        Show completed Todos? <input type="checkbox" ng-model="showComplete" />
+      </h5>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="logApp">
+<head>
+  <title>Log Ng</title>
+  <link rel="stylesheet" type="text/css" href="../../bootstrap.min.css">
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('logApp',[]);
+
+    app.factory('logService', function(){
+      var messageCount = 0;
+
+      var log = function(message) {
+        console.log(++messageCount + ": " + message);
+      };
+
+      var getMessageCount = function(){
+        return messageCount;
+      }
+
+      return {
+        log : log,
+        getMessageCount : getMessageCount
+      };
+    });
+
+    app.controller('logController', function($scope, logService) {
+      $scope.message = "";
+      $scope.totalMessages = logService.getMessageCount();
+
+      $scope.logMessage = function(message){
+        logService.log(message);
+        $scope.totalMessages = logService.getMessageCount();
+      };
+
+    });
+
+
+  </script>
+</head>
+<body ng-controller="logController">
+  <div class="container">
+    <div class="well">
+      <h1>ngLogger</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <input class="form-control" type="text" ng-model="message" />
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary" ng-click="logMessage(message)">
+          Log Message
+        </button>
+      </div>
+    </div>
+    <div>
+      <h4>Messages Logged: 
+        <span class="label label-default">
+          {{totalMessages}}
+        </span>
+      </h4>
+    </div>
+  </div>
+</body>
+</html>

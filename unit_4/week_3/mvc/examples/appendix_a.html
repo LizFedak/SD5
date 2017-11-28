@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Appendix A</title>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.directive('exDirective', function($compile){
+      return {
+        restrict : 'E',
+        scope : {},
+        template : "<button ng-click='click()'>Click</button>",
+        link : function($scope,$element,$attr) {
+          $scope.click = function() {
+            $scope.showContent = true;
+
+            var $p = "<p ng-show='showContent'>CONTENT!</p>"
+
+            var compiledParagraph = $compile($p)($scope);
+            $element.after(compiledParagraph);
+          }
+        }
+      }
+    })
+  </script>
+</head>
+<body>
+  <ex-directive></ex-directive>
+</body>
+</html>

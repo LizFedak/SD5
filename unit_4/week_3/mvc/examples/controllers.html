@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Controllers Ng</title>
+</head>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp',[]);
+  
+    app.controller('todosController', function($scope){
+      $scope.greeting = "Hello Angular";
+
+      $scope.age = 29;
+      $scope.year = 2016;
+      $scope.groceryList = [
+        "banana",
+        "coconut",
+        "wombat"
+      ];
+      $scope.person = {
+        firstname : "Bob",
+        lastname : "Dobbs"
+      };
+    });
+
+  </script>
+<body ng-controller="todosController">
+  <h1>{{greeting}}</h1>
+  <h3>{{person.firstname}} {{person.lastname}}</h3>
+  <ul>
+    <li>age: {{age}}</li>
+    <li>approximate birth year: {{year - age}}</li>
+    <li>Groceries:</li>
+    <ul>
+      <li>{{groceryList[0]}}</li>
+      <li>{{groceryList[1]}}</li>
+      <li>{{groceryList[2]}}</li>
+    </ul>  
+  </ul>
+</body>
+</html>

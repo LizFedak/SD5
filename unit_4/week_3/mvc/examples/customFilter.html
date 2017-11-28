@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Custom Filter Ng</title>
+</head>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp',[]);
+
+    app.controller('filterController', function($scope){
+      $scope.users = [
+        {name : "Kate", member : true, status : "gold"},
+        {name : "Andrew", member : false, status : "gold"},
+        {name : "Cole", member : true, status : "silver"},
+        {name : "Elizabeth", member : false, status : "gold"},
+        {name : "Martin", member : true, status : "bronze"},
+        {name : "Tina", member : true, status : "gold"},
+        {name : "Paul", member : true, status : "gold"},
+      ]
+    });
+
+    app.filter('memberStatusFilter', function(){
+      return function(users, status) {
+        var results = [];
+        users.forEach(function(user){
+          if (user.status === status && user.member) {
+            results.push(user);
+          }
+        });
+        return results;
+      }
+    })
+  </script>
+<body ng-controller="filterController">
+  <h1>Gold Members!</h1>
+  <ul>
+    <li ng-repeat="user in users | memberStatusFilter:'gold'">
+      {{user.name}}
+    </li>
+  </ul>
+  <h1>Silver Members!</h1>
+  <ul>
+    <li ng-repeat="user in users | memberStatusFilter:'silver'">
+      {{user.name}}
+    </li>
+  </ul>
+</body>
+</html>

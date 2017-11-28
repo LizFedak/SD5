@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="ngTodo">
+<head>
+  <title>Ng Todos</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script src="angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('ngTodo', []);
+    app.controller('todosController', function($scope){
+      $scope.todos = [
+        {task:"go round mums", completed:false},
+        {task:"get Lizzy back", completed:false},
+        {task:"sort life out", completed:false}
+      ];
+
+      $scope.addTodo = function(todo) {
+        $scope.todos.push({task: todo, completed:false});
+      };
+
+      $scope.showComplete = false;
+
+      $scope.incompleteTodosCount = function(){
+        var count = 0;
+        $scope.todos.forEach(function(todo){
+          if (!todo.completed){
+            count++;
+          }
+        });
+        return count;
+      };
+
+      $scope.warnUserStyle = function(){
+        return ($scope.incompleteTodosCount() > 3) 
+                ? "label-warning" 
+                : "label-success";
+      };
+    });
+
+    app.filter('completedFilter', function(){
+      return function(todos, showComplete){
+        var results = [];
+        todos.forEach(function(todo){
+          if (!todo.completed || showComplete) {
+            results.push(todo);
+          }
+        });
+        return results;
+      }
+    });
+
+    app.directive('todoRow', function(){
+      return {
+        restrict : 'A',
+        scope : {
+          todo : "="
+        },
+        templateUrl : "todo.template.html",
+        link : function($scope,$element,$attr){
+          if ($scope.todo.completed) {
+            $element.css({'text-decoration' :'line-through', color : "#808080"});
+          }
+        }
+      }
+    })
+
+    app.directive('myFooter', function(){
+      return {
+        restrict : 'E',
+        scope : {
+          todos : "="
+        },
+        templateUrl : "footer.template.html",
+        link : function($scope,$element,$attr){
+          $element.css('text-align', 'center')
+          $scope.completedTodos = function() {
+            var count = 0;
+            $scope.todos.forEach(function(todo){
+              if (todo.completed) {
+                count ++;
+              }
+            });
+            return count;
+          }
+
+        }
+      };
+    });
+
+  </script>
+</head>
+<body ng-controller="todosController">
+  <div class="container">
+  <div class="well">
+    <h1>
+      ngTodo
+      <span class="label" ng-class="warnUserStyle()">{{incompleteTodosCount()}}</span>
+      </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+      <input class="form-control" placeholder="Enter a new Todo" type="text" ng-model="todo" />
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary" ng-click="addTodo(todo)">Add</button>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <th>Todo</th>
+      <th>Mark</th>
+      <th>Done?</th>
+    </thead>
+    <tbody>
+      <tr todo-row todo="todo" ng-repeat="todo in todos | completedFilter:showComplete | orderBy:'task'" >
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <label>Show complete? </label>
+    <input type="checkbox" ng-model="showComplete" />
+  </div>
+  </div>
+  <my-footer todos="todos"></my-footer>
+</body>
+</html>

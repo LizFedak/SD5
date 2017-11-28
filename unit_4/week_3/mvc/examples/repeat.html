@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Repeat Ng</title>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp',[]);
+
+    app.controller('todosController', function($scope){
+      $scope.people = [
+        "Dave",
+        "Anne",
+        "Edna",
+        "Frank",
+        "Greg",
+        "Ben",
+        "Christine"
+      ]
+    })
+  </script>
+</head>
+<body ng-controller="todosController">
+  <ul>
+    <li ng-repeat="person in people | orderBy:'toString()'">
+      {{person}}
+    </li>
+  </ul>
+
+</body>
+</html>

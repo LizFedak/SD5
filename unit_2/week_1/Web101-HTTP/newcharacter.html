@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><title>Create a New Character</title></head>
+<body>
+<form name='character_details' method='POST' action='http://example.com/char.cgi'>
+ <label>Character Name:<input type="text" name='character_name'></label><br />
+ <label>Type: <select name='character_type'>
+	        <option value="pir">Pirate</option>
+	        <option value="nin">Ninja</option>
+	        <option value="zom">Zombie</option>
+	        <option value="rob">Robot</option>
+              </select></label><br />
+ <label>Inclination:
+ <input type='radio' name='inclination' value='orderly'>Orderly</input>
+ <input type='radio' name='inclination' value='neutral'>Neutral</input>
+ <input type='radio' name='inclination' value='anarchic'>Anarchic</input></label>
+<br /><label>Attitude:
+ <input type='radio' name='attitude' value='nice'>Nice</input>
+ <input type='radio' name='attitude' value='neutral'>Neutral</input>
+ <input type='radio' name='attitude' value='nasty'>Nasty</input></label>
+<br /><label>Powers (pick three):<br />
+  <input type='checkbox' name='power' value='Invisibility'>Invisibility</input>
+  <input type='checkbox' name='power' value='Flight'>Flight</input>
+  <input type='checkbox' name='power' value='Fist of explosion'>Fist of explosion</input> <br />
+  <input type='checkbox' name='power' value='Summon vermin'>Summon vermin</input>
+  <input type='checkbox' name='power' value='Bad Breath'>Bad Breath</input>
+  <input type='checkbox' name='power' value='Golf swing'>Golf swing</input> <br />
+  <input type='checkbox' name='power' value='Mad rhyming'>Mad rhyming</input>
+  <input type='checkbox' name='power' value='Nunchuk skills'>Nunchuk skills</input>
+  <input type='checkbox' name='power' value='Bow hunting skills'>Bow hunting skills</input> <br />
+  <input type='checkbox' name='power' value='Computer hacking skills'>Computer hacking skills</input></label><br />
+  <label>Catchphrase:
+  <textarea name='catchphrase' rows='2' cols='30' placeholder='Character catchphrase, eg: "Imma sort this mess OUT!"' style='vertical-align:top'></textarea></label><br />
+  <input type='hidden' name='player_level' value='1' />
+ <button name='create_character' value='Create'>Create Character</button> <br />
+</form> <hr />
+<form name='avatar_upload' method='POST' action='http://example.com/char.cgi'
+      enctype="multipart/form-data">
+  <button name='upload_avatar' value='Upload'>Upload Image File</button>
+  <input type='file' name='avatarfile' accept='image/*' /><br />
+</form>
+</body>
+</html>
+

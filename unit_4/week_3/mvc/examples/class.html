@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Class Ng</title>
+  <!-- assume these styles -->
+  <style type="text/css">
+    .green {
+      color: green;
+    }
+
+    .red {
+      color: red;
+    }
+  </style>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('classController', function($scope){
+      $scope.test = false;
+      $scope.stylePassingGrade = $scope.test ? "green" : "red";
+    });
+  </script>
+</head>
+<body ng-controller="classController">
+  <h1 ng-class="stylePassingGrade">43%</h1>
+</body>
+</html>

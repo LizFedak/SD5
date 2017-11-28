@@ -1,0 +1,13 @@
+LNAME,FNAME,DNUM,PAYAMT,JOBNUM
+"Tsang","Leila",4,20000,26
+"Sierra","Lisa",3,30000,22
+"Happ","Bill",4,18000,26
+"Garia","Pete",3,31000,22
+"Ehrlich","Donna",3,30000,22
+"Clemens","Edith",5,25000,8,23
+"Caner","Michael",3,30000,22
+"Gonzales","Pamela",6,25000,23
+"Merlick","Mary",2,30000,22
+"Hausuar","Keith",2,30000,22
+"Plank","Scott",2,32000,22
+"Minor","Sammy",4,18000,26

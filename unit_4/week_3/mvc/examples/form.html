@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+  <title>Forms Ng</title>
+</head>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script src="angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module("formApp",[]);
+
+    app.controller("formController", function($scope){
+      $scope.shoppingList = [
+        {name : "apple", purchased : false},
+        {name : "banana", purchased : false},
+        {name : "coconut", purchased : true},
+        {name : "date", purchased : true},
+        {name : "eucalyptus", purchased : true}
+      ]
+    });
+  </script>
+<body ng-controller="formController">
+  <div class="container">
+    <h3>Shopping list:</h3>
+    <table class="table table-striped">
+      <thead>
+        <th>Name</th>
+        <th>Mark</th>
+        <th>Purchased?</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in shoppingList">
+          <td>{{item.name}}</td>
+          <td><input type="checkbox" ng-model="item.purchased"/></td>
+          <td>{{item.purchased}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

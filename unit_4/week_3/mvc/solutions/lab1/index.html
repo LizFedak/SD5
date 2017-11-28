@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>ngTodos</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script src="angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.controller('todosController', function($scope){
+      $scope.todos = [
+        {task: 'go round mums', completed : false},
+        {task: 'get liz back', completed : false},
+        {task: 'sort life out', completed : false}
+      ]
+
+      $scope.addTodo = function(task) {
+        $scope.todos.push({task : task, completed : false});
+      }
+    })
+  </script>
+</head>
+<body ng-controller="todosController">
+  <div class="well">
+    <h1>
+      ngTodos
+      <span class="label label-success">{{todos.length}}</span>
+    </h1>
+  </div>
+  <div>
+
+    <input type="text" ng-model="newTask" class="form-control" />
+
+    <button ng-click="addTodo(newTask)" class="btn btn-primary">Add</button>
+    
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Todo</th>
+          <th></th>
+          <th>Done?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="todo in todos">
+          <td>{{todo.task}}</td>
+          <td></td>
+          <td>{{todo.completed}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

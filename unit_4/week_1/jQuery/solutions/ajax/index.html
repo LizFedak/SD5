@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script src="../download/jquery-2.2.3.min.js"></script>
+  </head>
+  <body>
+      <h1>Home Page, Welcome</h1>
+      <div id="content"></div>
+
+      <div id="ajaxContent"></div>
+
+      <button id="button">AJAX</button>
+
+      <script>
+         $('#content').load('partials.html #form');
+
+         $('#button').click(function(event){
+           $.ajax({
+             type : 'GET',
+             url : 'data.json',
+             dataType : 'JSON',
+             success : sweetData
+           }).fail(function(){
+             console.log('failed');
+           });
+         });
+
+         function sweetData(data){
+           var $ul = $('<ul>');
+           data.forEach(function(elem, index){
+             var $li = $('<li>' + index + '</li>');
+             var elemUL = $('<ul>');
+             for(p in elem){
+               var elemLI= $('<li>');
+               elemLI.text(p + " : " + elem[p]);
+               elemUL.append(elemLI);
+             }
+             $li.append(elemUL);
+             $ul.append($li);
+           });
+           $('#ajaxContent').append($ul);
+         }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="ngTodo">
+<head>
+  <title>Lab 5</title>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <script src="/js/angular.min.js"></script>
+  <script src="ngApp.js"></script>
+  <script src="services/todoService.js"></script>
+  <script src="controllers/todosController.js"></script>
+  <script src="filters/completedFilter.js"></script>
+  <script src="directives/myFooter/myFooter.js"></script>
+  <script src="directives/todoRow/todoRow.js"></script>
+</head>
+<body ng-controller="todosController">
+  <div class="container">
+  <div class="well">
+    <h1>
+      ngTodo
+      <span class="label" ng-class="warnUserStyle()">{{incompleteTodosCount()}}</span>
+      </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+      <input class="form-control" placeholder="Enter a new Todo" type="text" ng-model="todo" />
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary" ng-click="addTodo(todo)">Add</button>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <th>Todo</th>
+      <th>Mark</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr todo-row todo="todo" remove="remove" update="update" complete="complete" ng-repeat="todo in todos | completedFilter:showComplete | orderBy:'task'" >
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <label>Show complete? </label>
+    <input type="checkbox" ng-model="showComplete" />
+  </div>
+  </div>
+  <my-footer todos="todos"></my-footer>
+</body>
+</html>

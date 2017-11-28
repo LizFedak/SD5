@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="filterApp">
+<head>
+  <title>Filter Ng</title>
+  <script src="../../angular.min.js"></script>
+  <script type="text/javascript">
+
+  var app = angular.module('filterApp',[]);
+  app.controller('filterController', function($scope){
+    $scope.currency = [
+      12.94,
+      5.67,
+      9,
+      165.7
+    ];
+    $scope.dates = [
+      1466437807931,
+      1416635907931,
+      1462636907931
+    ];
+    $scope.people = [
+      {name : "Jim", member : true},
+      {name : "Barb", member : false},
+      {name : "Zach", member : true},
+      {name : "Anne", member : false}
+    ];
+  })
+    
+  </script>
+</head>
+<body ng-controller="filterController">
+<h1>Currency</h1>
+  <ul>
+    <li ng-repeat="curr in currency | orderBy">
+      {{curr | currency}}
+    </li>
+  </ul>
+
+  <h1>Date</h1>
+  <ul>
+    <li ng-repeat="date in dates">
+      {{date | date : "MM/dd/yyyy"}}
+    </li>
+  </ul>
+
+  <h1>People</h1>
+  <ul>
+    <li ng-repeat="person in people | orderBy:'name':'reverse'">
+      {{person.name}}
+    </li>
+  </ul>
+
+  <h1>UPPERCASE</h1>
+  <ul>
+    <li ng-repeat="person in people | orderBy:'name'">
+      {{person.name | uppercase}}
+    </li>
+  </ul>
+
+  <h1>lowercase</h1>
+  <ul>
+    <li ng-repeat="person in people | orderBy:'name'">
+      {{person.name | lowercase}}
+    </li>
+  </ul>
+
+  <h1>Members</h1>
+  <ul>
+    <li ng-repeat="person in people | filter:{'member':true} | orderBy:'name'">
+      {{person.name}}
+    </li>
+  </ul>
+
+</body>
+</html>
